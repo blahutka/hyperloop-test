@@ -4,23 +4,26 @@ class Updates < Hyperloop::Component
 
   render(DIV) do
     panels = []
-    Update.for_heart_category(params.heart.id, params.category).reverse.each do |update|
-      panels << { title: UpdateTitle(update: update).as_node,
-                  content: UpdatePanel(update: update).as_node,
-                  key: update.id.to_s
+
+    @data = Update.for_heart_category(params.heart.id, params.category)
+    @data.reverse.each do |update|
+      panels << {title: UpdateTitle(update: update).as_node,
+                 content: UpdatePanel(update: update).as_node,
+                 key: update.id.to_s
       }
     end
 
-    # HeartStore.load(params.heart.id, params.category).then do |result|
-    #   result.reverse.each do |update|
-    #     panels << {title: UpdateTitle(update: update).as_node,
-    #                content: UpdatePanel(update: update).as_node,
-    #                key: update.id.to_s
-    #     }
-    #   end
-    # end
+    Sem.Divider{}
+    Sem.Button(primary: true, content: 'Like', icon: 'heart', labelPosition: 'right',
+               label: { as: 'a', basic: true, content: '2,048' }.to_n)
 
-    Sem.Accordion(panels: panels.to_n, styled: false, fluid: true) if panels.any?
+    Sem.Button(content: 'Like', icon: 'heart', labelPosition: 'right',
+               label: { as: 'a', basic: true, content: '2,048' }.to_n)
+
+    Sem.Accordion(styled: true, panels: panels.to_n, fluid: true) if @data.loaded? && panels.any?
+
+    Sem.Loader(active: !@data.loaded?, inline: 'centered')
+
   end
 end
 
@@ -28,7 +31,7 @@ class UpdateTitle < Hyperloop::Component
   param :update
   render do
     SPAN {
-      SPAN { "Update from #{params.update.member.full_name} " }
+      SPAN {"Update from #{params.update.member.full_name} "}
       TimeAgo(date: params.update.updated_at)
     }
   end
@@ -38,6 +41,6 @@ class UpdatePanel < Hyperloop::Component
   param :update
 
   render do
-    SPAN { params.update.body }
+    SPAN {params.update.body}
   end
 end

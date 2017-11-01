@@ -9,4 +9,5 @@ class Update < ApplicationRecord
 
   scope :for_heart_category, ->(heart_id, category) { where(heart_id: heart_id).where(category: category) }
 
+  scope :as_first, ->() { Update.first }
 end
