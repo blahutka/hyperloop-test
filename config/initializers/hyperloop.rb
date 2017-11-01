@@ -4,6 +4,7 @@ Hyperloop.configuration do |config|
   config.cancel_import('hyper-router/react-router-source')
   config.compress_system_assets = false
   config.transport = :action_cable
+  config.console_auto_start = false unless Rails.env.production?
   config.prerendering = :off
   config.import 'reactrb/auto-import'
 end

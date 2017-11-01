@@ -23,10 +23,7 @@ require 'reactrb/auto-import'
 # require 'hyper-router/react-router-source'
 require 'hyper-router'
 
-# unless Rails.env.production?
-
-# end
-
+require 'hyper-console'
 require_tree './models' if RUBY_ENGINE == 'opal'
 require_tree './components'
 require_tree './operations'

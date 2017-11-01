@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'hyperloop'
 gem 'devise'
+gem 'hyper-console'
 gem 'opal_hot_reloader', git: 'https://github.com/fkchang/opal-hot-reloader.git'
 
 gem 'webpacker'
@@ -57,10 +58,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
-
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby "2.4.1"
+ruby "2.3.3"

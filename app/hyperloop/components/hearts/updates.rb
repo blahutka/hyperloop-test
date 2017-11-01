@@ -11,6 +11,15 @@ class Updates < Hyperloop::Component
       }
     end
 
+    # HeartStore.load(params.heart.id, params.category).then do |result|
+    #   result.reverse.each do |update|
+    #     panels << {title: UpdateTitle(update: update).as_node,
+    #                content: UpdatePanel(update: update).as_node,
+    #                key: update.id.to_s
+    #     }
+    #   end
+    # end
+
     Sem.Accordion(panels: panels.to_n, styled: false, fluid: true) if panels.any?
   end
 end

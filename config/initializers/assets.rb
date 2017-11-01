@@ -18,3 +18,8 @@ Rails.application.config.assets.precompile += %w( client-only.js components.js )
 
 Rails.application.config.assets.paths << Rails.root.join('public', 'packs').to_s
 Rails.application.config.assets.paths << Rails.root.join('public', 'assets').to_s
+
+Rails.application.config.assets.precompile += %w( hyper-console-client.css )
+Rails.application.config.assets.precompile += %w( hyper-console-client.min.js )
+
+Rails.application.config.assets.precompile += %w( action_cable.js )
