@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: hearty_production
-  username: hearty
-  password: <%= ENV['HEARTY_DATABASE_PASSWORD'] %>
+  #  database: hearty_production
+  #  username: hearty
+  #  password: <%= ENV['HEARTY_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
