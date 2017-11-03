@@ -7,6 +7,7 @@ class AppRouter < Hyperloop::Router
         Route('/', exact: true, mounts: Home)
         Route('/members', exact: true, mounts: Members)
         Route('/l', exact: true, mounts: PageLayout)
+        Route('/school', exact: true, mounts: School::Index)
       end
     }
   end
