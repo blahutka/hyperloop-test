@@ -1,0 +1,32 @@
+.exercise-item {
+  .ui.disabled .text {
+    color: black;
+  }
+
+  .ui.disabled.dropdown, .ui.dropdown .menu>.disabled.item {
+    opacity: 1;
+  }
+
+  .ui.labeled.button>.label {
+    font-size: 0.8rem;
+  }
+
+  .exercise-input {
+    border-bottom: 1px solid black;
+
+    &.disabled {
+      opacity: 1;
+      border-bottom: 1px solid transparent;
+    }
+    input {
+      font-weight: bold;
+
+
+      &:disabled {
+        opacity: 1 !important;
+      }
+    }
+  }
+
+//  .ui.form .disabled.field, .ui.form .disabled.fields .field, .ui.form .field :disabled
+}

@@ -36,7 +36,7 @@
     "react-timeago": "3.2.1",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
-    "semantic-ui-react": "^0.71.3",
+    "semantic-ui-react": "^0.76.0",
     "style-loader": "^0.18.2",
     "typeface-roboto": "^0.0.31",
     "webpack": "^3.5.6",

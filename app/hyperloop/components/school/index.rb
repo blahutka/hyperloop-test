@@ -1,9 +1,27 @@
 require 'react/server'
 require 'react/ref_callback'
+require 'native'
 
 module School
   class Index < Hyperloop::Router::Component
-    state editor_content: 'text [btn] [img] What is your [select:one:true,two:false] for your question?'
+
+    @exercise_with_description = <<-EOS
+    [Description]
+    My description starts here,
+    finish this.
+    
+    # What is this number more
+    # How many select are [select] more [select]
+    # One more [select] from? 
+    # Make this [input] for what
+    # (did, run) [input].
+    
+    
+    Continue with the text
+    EOS
+
+
+    state editor_content: @exercise_with_description
     param editor_default: 'text'
     state :preview
 
@@ -17,7 +35,6 @@ module School
     end
 
     render(DIV) do
-
       Sem.Container(style: {marginTop: '2em'}) {
         Sem.Grid {
           Sem.GridRow {
@@ -50,6 +67,7 @@ module School
     def send_key?(e)
       (e.char_code == 13 || e.key_code == 13) && (e.meta_key || e.ctrl_key)
     end
+
   end
 
 end
