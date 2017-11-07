@@ -5,33 +5,30 @@ require 'native'
 module School
   class Index < Hyperloop::Router::Component
 
-    @exercise_with_description = <<-EOS
-    [Description]
-    My description starts here,
-    finish this.
-    
-    # What is this number more
-    # How many select are [select] more [select]
-    # One more [select] from? 
-    # Make this [input] for what
-    # (did, run) [input].
-    
-    
-    Continue with the text
-    EOS
-
-
-    state editor_content: @exercise_with_description
+    state editor_content: ''
     param editor_default: 'text'
     state :preview
 
     before_mount do
+      @exercise_with_description = <<-EOS
+      [Description]
+      My description starts here, finish this.
+      
+        # What is this number more
+        # How many select are [select true,true | second | third ] more [select one | true,true | third ]
+        # One more [select: true,true | second | third] from? 
+        # Make this [input] for what
+        # (did, run) [input].
+      
+      
+      Continue with the text
+      EOS
 
+      mutate.editor_content(@exercise_with_description)
     end
 
     after_mount do
-      # `console.log(#{refs['editor']}.native)`
-      # refs['editor'].focus()
+      refs['editor'].focus()
     end
 
     render(DIV) do
@@ -42,10 +39,9 @@ module School
               H1 {'School'}
               Sem.Divider
               div do
-                School.EditorPreview(source: state.editor_content)
+                School.EditorPreview(editor_content: state.editor_content)
               end
               Sem.Divider
-
               editor
             }
           }
@@ -56,11 +52,11 @@ module School
 
     def editor
       Sem.Form do
-        Sem.TextArea(ref: 'editor', autoHeight: true).on(:change) do |e|
-          mutate.editor_content(e.target.value)
-        end.on(:key_down) do |e|
-          #send_preview(state.editor_content) if send_key?(e)
-        end
+        Sem.TextArea(ref: 'editor',
+                     defaultValue: @exercise_with_description,
+                     autoHeight: true)
+            .on(:change) {|ev| mutate.editor_content(ev.target.value)}
+            .on(:key_down) {}
       end
     end
 

@@ -27,11 +27,8 @@ module School
       end
 
       def parse_exercise
-        tokenizer = Native(`Tokenizer`)
-        return tokenizer.parse({parseText: params.editor_content,
-                         parsers: params.matcher_exercise.to_n,
-                         deftok: 'invalid'
-                        })
+        School::Tokenizer.parse(parse_text: params.editor_content,
+                             parsers: params.matcher_exercise)
       end
 
       class Description < Hyperloop::Component

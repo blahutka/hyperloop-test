@@ -3,30 +3,36 @@ module School
     class ExerciseItem < Hyperloop::Component
       param :editor_content
       param :component_matchers, default: {
-          Select: /\[select\]/,
+          Select: /\[select:?([^\]]+)?\]/,
           Input: /\[input\]/
       }
       state valid_count: 0
 
       before_update do
-        @answers = []
+        @answers_count = 0
       end
 
       before_mount do
-        @answers = []
+        @answers_count = 0
         @success = []
         @tries = []
       end
 
       def on_validation
-        -> (data) {
-          #puts 'validating'
-          # puts data
+        lambda { |data|
           @success << data[:position] if data[:valid]
           @success.uniq!
           @tries << data[:value]
           mutate.valid_count(@success.length)
-          # puts 'valid count', state.valid_count
+        }
+      end
+
+      def reset_validation
+        lambda {
+          @answers_count = 0
+          @tries = []
+          @success = []
+          mutate.valid_count(@success.length)
         }
       end
 
@@ -37,25 +43,27 @@ module School
             # `console.log(#{token}.native)`
             case token.type
               when 'Select' then
-                @answers << 1
-                School::Language::ExerciseSelect(position: i, valid_answer: 'did', on_validation: on_validation)
+                @answers_count += 1
+
+                School::Language::ExerciseSelect(position: i,
+                                                 editor_content: (token.matches.any? ? token.matches[0] : nil),
+                                                 on_validation: on_validation,
+                                                 on_reset_validation: reset_validation)
               when 'Input' then
-                @answers << 1
+                @answers_count += 1
                 School::Language::ExerciseInput(position: i, valid_answer: 'valid answer, is longer', on_validation: on_validation)
               else
                 SPAN {token.token}
             end
           end
 
-          School::Language::ExerciseResult(success: state.valid_count, answers: @answers.length, tries: @tries.count) if @answers.any?
+          School::Language::ExerciseResult(success: state.valid_count, answers: @answers_count, tries: @tries.count) if @answers_count > 0
         end
       end
 
       def parse_exercise_item_text
-        tokenizer = Native(`Tokenizer`)
-        tokenizer.parse({parseText: params.editor_content,
-                         parsers: params.component_matchers, deftok: 'invalid'
-                        })
+        School::Tokenizer.parse(parse_text: params.editor_content,
+                                parsers: params.component_matchers)
       end
 
     end

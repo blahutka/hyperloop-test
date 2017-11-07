@@ -1,6 +1,6 @@
 module School
   class EditorPreview < Hyperloop::Component
-    param :source
+    param :editor_content
 
     after_update do
       # `console.log(#{params.tokenizer}.native)`
@@ -11,7 +11,7 @@ module School
     end
 
     def to_components
-      School::Language::Exercise(editor_content: params.source)
+      School::Language::Exercise(editor_content: params.editor_content)
     end
   end
 

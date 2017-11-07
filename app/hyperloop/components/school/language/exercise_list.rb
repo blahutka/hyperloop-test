@@ -11,7 +11,6 @@ module School
         # puts params.editor_content
         if params.editor_content.present?
           parse_exercise_item.each do |token|
-            # `console.log(#{token}.native)`
             case token.type
               when 'ExerciseItem' then
                 School::Language::ExerciseItem(editor_content: token.matches[0])
@@ -23,10 +22,8 @@ module School
       end
 
       def parse_exercise_item
-        tokenizer = Native(`Tokenizer`)
-        tokenizer.parse({parseText: params.editor_content,
-                         parsers: params.matchers, deftok: 'invalid'
-                        })
+        School::Tokenizer.parse(parse_text: params.editor_content,
+                                parsers: params.matchers)
       end
     end
   end
