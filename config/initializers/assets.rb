@@ -23,3 +23,4 @@ Rails.application.config.assets.precompile += %w( hyper-console-client.css )
 Rails.application.config.assets.precompile += %w( hyper-console-client.min.js )
 
 Rails.application.config.assets.precompile += %w( action_cable.js )
+Rails.application.config.assets.precompile += %w( jquery.js jquery_ujs.js time_cop.js)
