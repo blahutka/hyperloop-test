@@ -3,8 +3,8 @@ module School
     class ExerciseItem < Hyperloop::Component
       param :editor_content
       param :component_matchers, default: {
-          Select: /\[select:?([^\]]+)?\]/,
-          Input: /\[input\]/
+          Select: School::Tokenizer::GENERAL[:Select],
+          Input: School::Tokenizer::GENERAL[:Input]
       }
       state valid_count: 0
 

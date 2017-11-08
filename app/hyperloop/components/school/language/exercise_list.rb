@@ -1,11 +1,11 @@
+require '../tokenizer'
+
 module School
   module Language
     class ExerciseList < Hyperloop::Component
 
       param :editor_content, type: String
-      param :matchers, default: {
-          ExerciseItem: /#\s(.+)/,
-      }
+      param :matchers, default: { ExerciseItem: School::Tokenizer::EXERCISE[:Item] }
 
       render(OL) do
         # puts params.editor_content
