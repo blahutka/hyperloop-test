@@ -36,7 +36,6 @@ module School
           Sem.GridRow {
             Sem.GridColumn {
               H1 {'School'}
-              FileList()
               Sem.Divider
               div do
                 School.EditorPreview(editor_content: state.editor_content)
