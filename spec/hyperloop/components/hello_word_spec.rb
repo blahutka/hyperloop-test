@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'HelloWord', js: true do
+describe 'HelloWord', type: :feature, js: true do
   it 'has the correct content' do
     mount 'HelloWord', name: 'Fred'
     expect(page).to have_content('Hello there Fred')

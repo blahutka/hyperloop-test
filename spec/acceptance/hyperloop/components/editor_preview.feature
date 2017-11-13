@@ -1,4 +1,4 @@
-@javascript @keep_session @debugger[]
+@selenium_with_firebug @javascript @keep_session @debugger[]
 Feature: School::EditorPreview is component, which receives user input as easy formatted text.
   The user text input is converted to html markup which is displayed back as user preview.
 

@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/LRDesign/rspec-steps.git
+  revision: a2cccb8f6658821e0719ebb1c3c1d8ca2363b056
+  specs:
+    rspec-steps (2.1.1)
+      rspec (>= 3.0, < 3.99)
+
+GIT
   remote: https://github.com/fkchang/opal-hot-reloader.git
   revision: 7e557a1a713217b9df351f468e6dd493d9358748
   specs:
@@ -112,6 +119,7 @@ GEM
     erubi (1.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
+    gherkin (4.1.3)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hike (1.2.3)
@@ -271,6 +279,10 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rspec (3.7.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
     rspec-core (3.7.0)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -305,6 +317,9 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    site_prism (2.9)
+      addressable (>= 2.3.3, < 3.0)
+      capybara (>= 2.1, < 3.0)
     sourcemap (0.1.1)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -328,6 +343,9 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     timecop (0.9.1)
+    turnip (3.0.0)
+      gherkin (~> 4.0)
+      rspec (>= 3.0, < 4.0)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -374,11 +392,14 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.2)
+  rspec-steps!
   sass-rails (~> 5.0)
+  site_prism
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   statesman
+  turnip
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)

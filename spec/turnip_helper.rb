@@ -8,11 +8,6 @@ Dir.glob("spec/acceptance/steps/**/*steps.rb") {|f| load f, true}
 RSpec.configure do |config|
   #config.include(EditorPreview2)
 
-  config.before(:type => :feature) do
-    client_option layout: 'application'
-
-  end
-
   config.after(type: :feature, keep_session: true) do
     # Keep all session variables present for tagged :keep_session scenario
     Capybara.current_session.instance_variable_set(:@touched, false)
@@ -45,6 +40,7 @@ RSpec.configure do |config|
       pause("*** debugger::stop ***\n#{step_descriptions[1..-1].join("\n")}")
     elsif lines
       page.evaluate_script("#{status}")
+      pause()
     end
   end
 
