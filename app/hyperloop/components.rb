@@ -9,7 +9,7 @@ require 'hyper-component'
 
 if React::IsomorphicHelpers.on_opal_client?
   require 'opal-jquery'
-  require 'browser'
+  # require 'browser' # disable for phantomjs
   require 'browser/interval'
   require 'browser/delay'
   require 'opal_hot_reloader'

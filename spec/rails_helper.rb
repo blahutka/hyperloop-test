@@ -33,7 +33,8 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  # TODO Add http://databasecleaner.github.io
+  config.use_transactional_fixtures = false
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -54,4 +55,18 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+Capybara.register_driver :poltergeist_heart do |app|
+  options = {
+      js_errors: true, timeout: 180, inspector: true,
+      phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes']
+  }.tap do |hash|
+    unless ENV['SHOW_LOGS']
+      hash[:phantomjs_logger] = StringIO.new
+      hash[:logger] = StringIO.new
+    end
+  end
+
+  Capybara::Poltergeist::Driver.new(app, options)
 end
